@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Camila Gámez — Princesa</title>
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#0b2a2a;
+      --card:rgba(255,255,255,.08);
+      --card2:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.68);
+      --stroke:rgba(255,255,255,.14);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(88, 255, 218, .18), transparent 55%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(120, 140, 255, .18), transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      width:min(1100px, 92vw);
+      margin: 28px auto 38px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 16px;
+      border:1px solid var(--stroke);
+      border-radius: calc(var(--radius) + 8px);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .dotLogo{
+      width:12px; height:12px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #b9ffef, #2de0c2 60%, #0a6c5d);
+      box-shadow: 0 0 0 6px rgba(45,224,194,.12);
+    }
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing:.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight:700;
+    }
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      margin:0;
+      text-align:right;
+      line-height:1.3;
+    }
+
+    .panel{
+      margin-top:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .sparkle{
+      position:absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(185,255,239,.18), transparent 60%);
+      filter: blur(2px);
+      top: -140px;
+      right: -160px;
+      pointer-events:none;
+    }
+
+    .section{
+      padding: 28px;
+    }
+    @media (max-width: 720px){
+      .section{ padding: 18px; }
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .heroTitle{
+      font-size: clamp(34px, 4.6vw, 58px);
+      margin: 0 0 10px 0;
+      line-height:1.05;
+      letter-spacing:-.5px;
+    }
+
+    .sub{
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.6;
+      max-width: 75ch;
+      white-space: pre-line;
+    }
+
+    .pillRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .pill{
+      padding: 9px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.86);
+      font-size: 12px;
+      letter-spacing:.2px;
+    }
+
+    .photo{
+      width:100%;
+      height: 100%;
+      min-height: 360px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      position:relative;
+      background: rgba(0,0,0,.15);
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.02);
+      filter: contrast(1.02) saturate(1.05);
+    }
+    .photo .caption{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      right:14px;
+      padding:10px 12px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      color: rgba(255,255,255,.86);
+      line-height:1.35;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .twoCol{ grid-template-columns: 1fr; }
+    }
+    .sectionTitle{
+      margin:0 0 10px 0;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+    .list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.84);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    .list li{ margin: 8px 0; }
+
+    /* Carousel */
+    .carouselWrap{
+      margin-top: 18px;
+    }
+    .carouselHeader{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 12px;
+    }
+    .carouselHeader p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.45;
+    }
+
+    .cControls{
+      display:flex;
+      gap:10px;
+    }
+    .btn{
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight: 700;
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+      transition: transform .15s ease, background .15s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.14); }
+    .btn:active{ transform: translateY(0px) scale(.98); }
+
+    .carousel{
+      display:flex;
+      gap:14px;
+      overflow:auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+    }
+    .carousel::-webkit-scrollbar { height: 10px; }
+    .carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 999px; }
+    .carousel::-webkit-scrollbar-track { background: rgba(255,255,255,.06); border-radius: 999px; }
+
+    .cItem{
+      flex: 0 0 auto;
+      width: min(260px, 72vw);
+      aspect-ratio: 4/5;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      position:relative;
+      scroll-snap-align: start;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
+    .cItem img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .cItem span{
+      position:absolute;
+      left:10px; right:10px; bottom:10px;
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+    }
+
+    footer{
+      margin-top: 14px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="dotLogo"></div>
+        <h1>Camila Gámez</h1>
+      </div>
+      <p class="hint">
+        Una sola página · con carrusel de fotos
+      </p>
+    </div>
+
+    <div class="panel">
+      <div class="sparkle"></div>
+
+      <!-- HERO -->
+      <div class="section">
+        <div class="grid">
+          <div class="card">
+            <h2 class="heroTitle">Camila, “Princesa”.</h2>
+
+            <p class="sub">Princesa no por título, sino por presencia.
+Hay mujeres que entran a un lugar… y hay mujeres que cambian la energía del lugar.
+Ella es de las segundas.
+
+Tiene carácter, sí. Firme. Auténtico.
+Pero detrás de esa mirada fuerte vive un corazón leal,
+de esos que no se regalan fácil,
+pero cuando se entregan… se quedan.
+
+Camina como si supiera algo que el mundo todavía está tratando de entender.
+Y sus ojos —verdes, profundos—
+no miran: atraviesan.
+
+Es perfecta.
+Y eso la hace peligrosa… en el mejor sentido.</p>
+
+            <p class="sub" style="margin-top:-6px;">Bonus: esa habilidad de “voltear los ojos” como si fuera deporte olímpico.</p>
+
+            <div class="pillRow">
+              <span class="pill">Leal</span>
+              <span class="pill">Se preocupa por los suyos</span>
+              <span class="pill">Carácter fuerte (con fondo bueno)</span>
+              <span class="pill">Ojos verdes</span>
+              <span class="pill">Catirita</span>
+              <span class="pill">Energy: “no me hagas repetirlo”</span>
+            </div>
+          </div>
+
+          <!-- FOTO PRINCIPAL (NO SE QUITA) -->
+          <div class="photo">
+            <img src="WhatsApp Image 2026-02-16 at 21.02.01 (4).jpeg" alt="Foto principal de Camila">
+            <div class="caption">
+              “Princesa” en modo natural. Tranquila… pero con presencia.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ATRIBUTOS + FOTO EXTRA (lo que antes era slide 2) -->
+      <div class="section">
+        <div class="twoCol">
+          <div class="card">
+            <h3 class="sectionTitle">Lo que la define</h3>
+            <ul class="list">
+              <li><strong>Carácter con presencia:</strong> no es de las que pasan desapercibidas.</li>
+              <li><strong>Lealtad:</strong> cuando está, está de verdad.</li>
+              <li><strong>Se preocupa por uno:</strong> aunque a veces lo demuestre “a su manera”.</li>
+              <li><strong>Mirada fuerte:</strong> y sí… ojos verdes que resaltan.</li>
+              <li><strong>Actitud:</strong> esa mezcla de “ok” con “ajá” (tú entiendes).</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="sectionTitle">Otra vibra de ella</h3>
+            <div class="photo" style="min-height: 420px;">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.01 (1).jpeg" alt="Foto de Camila 2">
+              <div class="caption">
+                Un ángulo que deja claro: personalidad primero.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARRUSEL -->
+        <div class="carouselWrap">
+          <div class="carouselHeader">
+            <div>
+              <h3 class="sectionTitle" style="margin:0 0 6px 0;">Carrusel de fotos</h3>
+              <p>Desliza con el mouse/touch o usa las flechas.</p>
+            </div>
+
+            <div class="cControls">
+              <button class="btn" type="button" id="cPrev">◀</button>
+              <button class="btn" type="button" id="cNext">▶</button>
+            </div>
+          </div>
+
+          <div class="carousel" id="carousel">
+            <div class="cItem">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.00.jpeg" alt="Foto 1">
+              <span>Close-up — vibe directa.</span>
+            </div>
+            <div class="cItem">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.01 (2).jpeg" alt="Foto 2">
+              <span>Outfit + actitud.</span>
+            </div>
+            <div class="cItem">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.01 (3).jpeg" alt="Foto 3">
+              <span>Momento casual — presencia real.</span>
+            </div>
+            <div class="cItem">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.01.jpeg" alt="Foto 4">
+              <span>Captura natural.</span>
+            </div>
+            <div class="cItem">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.01 (4).jpeg" alt="Foto 5">
+              <span>Mirada top.</span>
+            </div>
+            <div class="cItem">
+              <img src="WhatsApp Image 2026-02-16 at 21.02.01 (1).jpeg" alt="Foto 6">
+              <span>Ángulo icónico.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="section" style="padding-top:0;">
+        Hecho en HTML simple.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const c = document.getElementById('carousel');
+      const prev = document.getElementById('cPrev');
+      const next = document.getElementById('cNext');
+
+      function step(){
+        // Avanza el ancho de una tarjeta + gap (aprox)
+        const first = c.querySelector('.cItem');
+        if(!first) return 260;
+        const styles = getComputedStyle(c);
+        const gap = parseFloat(styles.columnGap || styles.gap || "14") || 14;
+        return first.getBoundingClientRect().width + gap;
+      }
+
+      prev.addEventListener('click', () => c.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => c.scrollBy({ left:  step(), behavior: 'smooth' }));
+
+      // Drag con mouse/touch (opcional pero “cool”)
+      let isDown = false;
+      let startX = 0;
+      let startScroll = 0;
+
+      c.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        c.setPointerCapture(e.pointerId);
+        startX = e.clientX;
+        startScroll = c.scrollLeft;
+      });
+
+      c.addEventListener('pointermove', (e) => {
+        if(!isDown) return;
+        const dx = e.clientX - startX;
+        c.scrollLeft = startScroll - dx;
+      });
+
+      c.addEventListener('pointerup', () => { isDown = false; });
+      c.addEventListener('pointercancel', () => { isDown = false; });
+      c.addEventListener('mouseleave', () => { isDown = false; });
+    })();
+  </script>
+</body>
+</html>
